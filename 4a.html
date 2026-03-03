@@ -19,28 +19,22 @@
   <script src="https://unpkg.com/supersimpledev/babel.js"></script>
   <script type="text/babel">
 
-
-
-
-
-
+    // LoginUI Component 
     function LoginUI({ showPassword, setShowPassword }) {
 
-      function ShowPass() {
+      function ShowPass() { // Updater Function 
         setShowPassword(!showPassword)
       }
-
 
       return (
         <div className="LoginContainer">
           <h1>Hello, welcome To my website </h1>
           <input placeholder="Email"
-
-            type="Email"
+            type="email"
             className="InputHolder" />
           <div className="sideTo">
             <input placeholder="Password"
-              type={showPassword ? 'text' : "password"}
+              type={showPassword ? 'text' : "password"} // Text le shows normal as it says if the showPassword true bhaye chai text natra password format ma convert garne
               className="InputHolder" />
             <button className="StaticBtn" onClick={ShowPass}>{showPassword === false ? "Show" : "Hide"}</button>
           </div>
@@ -72,7 +66,7 @@
     function App() {
 
       const [btnStatus, setBtnStatus] = React.useState(false); // Available For all
-      const [showPassword, setShowPassword] = React.useState(false);
+      const [showPassword, setShowPassword] = React.useState(false); // State's for Passwords
 
       return (
         <>
