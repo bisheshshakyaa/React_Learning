@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Exercises</title>
+  <link rel="stylesheet" href="./css/styling.css">
+  </link>
+
+</head>
+
+<body>
+
+
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+
+
+
+
+
+    function LoginUI({ showPassword, setShowPassword }) {
+
+      function ShowPass() {
+        setShowPassword(!showPassword)
+      }
+
+
+      return (
+        <div className="LoginContainer">
+          <h1>Hello, welcome To my website </h1>
+          <input placeholder="Email"
+
+            type="Email"
+            className="InputHolder" />
+          <div className="sideTo">
+            <input placeholder="Password"
+              type={showPassword ? 'text' : "password"}
+              className="InputHolder" />
+            <button className="StaticBtn" onClick={ShowPass}>{showPassword === false ? "Show" : "Hide"}</button>
+          </div>
+
+          <div className="Btn-group">
+            <button className="StaticBtn">Login </button>
+            <button className="StaticBtn"> SignUp </button>
+
+          </div>
+        </div>
+      )
+    }
+
+
+    function StaticBtn({ btnStatus, setBtnStatus }) {
+
+      function ChangeState() { // State Change garna ko lagi function create Gare. Also a updater Function
+        setBtnStatus(!btnStatus) //  J cha tesko ulta garne for status 
+      }
+
+      return (
+        <div>
+          <button className={btnStatus === false ? 'StaticBtn' : 'StaticBtn-2'} onClick={ChangeState}>{btnStatus ? "OFF" : "ON"}</button>
+        </div>
+      )
+    }
+
+
+    function App() {
+
+      const [btnStatus, setBtnStatus] = React.useState(false); // Available For all
+      const [showPassword, setShowPassword] = React.useState(false);
+
+      return (
+        <>
+          <LoginUI
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+
+          <StaticBtn
+            btnStatus={btnStatus}
+            setBtnStatus={setBtnStatus} />
+
+        </>
+      )
+    }
+
+
+
+    const gap_holding = document.querySelector('.hold');
+    ReactDOM.createRoot(gap_holding).render(<App />);
+  </script>
+</body>
+
+</html>
