@@ -17,7 +17,10 @@
   <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
   <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
   <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
   <script type="text/babel">
+
 
     // LoginUI Component 
     function LoginUI({ showPassword, setShowPassword }) {
@@ -36,7 +39,7 @@
             <input placeholder="Password"
               type={showPassword ? 'text' : "password"} // Text le shows normal as it says if the showPassword true bhaye chai text natra password format ma convert garne
               className="InputHolder" />
-            <button className="StaticBtn" onClick={ShowPass}>{showPassword === false ? "Show" : "Hide"}</button>
+            <button className="StaticBtn-3" onClick={ShowPass}>{showPassword === false ? <img src="./images/eye.png" className="imgContainer" /> : <img src="./images/hide.png" className="imgContainer" />}</button>
           </div>
 
           <div className="Btn-group">

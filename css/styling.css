@@ -48,3 +48,15 @@ body {
   flex-direction: row;
   align-items: center;
 }
+.imgContainer {
+  width: 25px;
+}
+.StaticBtn-3 {
+  display: flex;
+  justify-content: start;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  margin: 0.2rem;
+}
