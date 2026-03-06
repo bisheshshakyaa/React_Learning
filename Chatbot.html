@@ -20,6 +20,20 @@
   <script type="text/babel">
 
 
+    function useAutoScroll() {
+      return (
+        <>
+
+        </>
+      )
+    }
+
+
+
+
+
+
+
     function ChatInput({ chatMessages, setChatMessages, loading, setLoading }) {
 
       const [inputText, setInputText] = React.useState('') // Done to save the text from the textbox as data changes overtime for it 
@@ -142,12 +156,12 @@
           : 'chatMessage-robot'
         }>
           {sender === "robot" && (
-            <img className="chatMessage-bot" src="robot.png" />)}
+            <img className="chatMessage-bot" src="./images/robot.png" />)}
           <div className="chatMessage-txt">
             {message}
           </div>
           {sender === "user" && (
-            <img className="chatMessage-profile" src="user.png" />)}
+            <img className="chatMessage-profile" src="./images/user.png" />)}
         </div>
 
       )
@@ -184,29 +198,29 @@
     function App() {
       const [loading, setLoading] = React.useState(false);
 
-      const [chatMessages, setChatMessages] = React.useState(
-        [{
-          message: 'Hello Chatbot',
-          sender: 'user',
-          id: 'id1'
-        },
-        {
-          message: 'Hi! How can I help you?',
-          sender: 'robot',
-          id: 'id2'
-        },
-        {
-          message: 'Can you get me todays date',
-          sender: 'user',
-          id: 'id3'
-        },
-        {
-          message: 'Todays is February 7',
-          sender: 'robot',
-          id: 'id4'
-        },
+      const [chatMessages, setChatMessages] = React.useState([]
+        // [{
+        //   message: 'Hello Chatbot',
+        //   sender: 'user',
+        //   id: 'id1'
+        // },
+        // {
+        //   message: 'Hi! How can I help you?',
+        //   sender: 'robot',
+        //   id: 'id2'
+        // },
+        // {
+        //   message: 'Can you get me todays date',
+        //   sender: 'user',
+        //   id: 'id3'
+        // },
+        // {
+        //   message: 'Todays is February 7',
+        //   sender: 'robot',
+        //   id: 'id4'
+        // },
 
-        ]
+
       );
       // const [chatMessages, setChatMessages] = array; 
       // const chatMessages = array[0]  // Current Data
@@ -214,11 +228,19 @@
 
       return (
         <div className="Comp_container">
+          {chatMessages.length === 0 ? (
+            <div className="Welcome-text">
+              <p>Welcome to the chatbot project! Send a message using the textbox below</p>
+            </div>
+          ) : (
+            <ChatMessages
+              chatMessages={chatMessages}
+            />
+          )
+          }
 
-          <ChatMessages
-            chatMessages={chatMessages}
-          />
-          {loading && <p>Loading....</p>}
+
+          {loading && <img src="./gif/loading-spinner.gif" className="gif-size"></img>}
           <ChatInput
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}

@@ -73,3 +73,13 @@ body {
   overflow: scroll;
   scrollbar-width: none;
 }
+.Welcome-text {
+  color: grey;
+  display: flex;
+  align-items: center;
+}
+.gif-size {
+  height: 50px;
+  width: 50px;
+  margin: -15px;
+}
