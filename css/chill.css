@@ -1,0 +1,19 @@
+.BtnContainer {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  background-color: rgb(222, 222, 222);
+}
+
+.StaticBtn {
+  display: flex;
+  background-color: rgb(25, 135, 84);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  margin: 0.2rem;
+}
