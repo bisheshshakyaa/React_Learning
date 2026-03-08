@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>React Basics</title>
+</head>
+
+<body>
+
+
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+    const button =
+      <button>
+        Hello
+      </button>
+
+    const paraGraph = <p> Paragraph Of Text</p>
+    const container = document.querySelector('.js-container');
+
+    const heading = <h1>Testing Out how container and paragraph works with react only</h1>
+
+    const div = (
+      <div>
+        <button> Hello</button>
+        <p> Paragraph Of Text {2 + 2}</p>
+      </div>
+    )
+    const gap_holding = document.querySelector('.hold');
+
+
+    ReactDOM.createRoot(gap_holding).render(div);
+  </script>
+</body>
+
+</html>

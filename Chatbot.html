@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ChatBot</title>
+  <link rel="stylesheet" href="./css/style.css">
+  </link>
+
+</head>
+
+<body>
+
+
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+
+    function useAutoScroll() {
+      return (
+        <>
+
+        </>
+      )
+    }
+
+
+
+
+
+
+
+    function ChatInput({ chatMessages, setChatMessages, loading, setLoading }) {
+
+      const [inputText, setInputText] = React.useState('') // Done to save the text from the textbox as data changes overtime for it 
+
+      // function EnterValue(event) {
+      //   setInputText(event.key)
+      // }
+      function EnterValue(event) {
+        if (event.key === 'Enter') {
+          SendMessages()
+        }
+      }
+
+      function RemoveVal(event) {
+        if (event.key === 'Escape') {
+          removeMessage()
+        }
+      }
+
+
+      function saveInputText(event) {
+        setInputText(event.target.value)
+      }
+
+      function removeMessage() {
+        setInputText('')
+      }
+      // ? Random Kura gare ho yo SpecialWord Wala
+      // function SpecialWord() {
+      //   if (event.key === '`' || event.key === "`") {
+      //     setInputText('');
+      //   }
+      // }
+
+      async function SendMessages() { // Updator Function.
+
+        if (inputText.trim() === '' || loading) return; // if the state is empty then return gari halcha khali text haru pathauna na milne gari
+
+        const messageToSend = inputText; // Text in the Input are stored in messageToSend  
+        setInputText(''); // Right after the inputText is stored it is the input is set to be empty for clearing the input and responsive feel
+        setLoading(true); // Start Loading 
+
+        const newChatMessages = ([
+          ...chatMessages, // Data Lai chai Copy garna ko lagi chai we are using the spread operator. 
+          {
+            message: messageToSend, // inputText le chai take's the text we write in text box
+            sender: 'user',
+            id: crypto.randomUUID() // Unique ID string 
+          }
+        ]
+        )
+        setChatMessages(newChatMessages);
+
+
+
+        const Response = await Chatbot.getResponseAsync(messageToSend); // External Library being used here
+        setChatMessages([
+          ...newChatMessages, // Data Lai chai Copy garna ko lagi chai we are using the spread operator. 
+          {
+            message: Response,
+            sender: 'robot',
+            id: crypto.randomUUID()
+          }
+        ]
+        )
+        setLoading(false)
+        // setInputText(''); // Yes le chai value empty ma rakio so everytime send gare paxi yo run huncha 
+
+
+
+      }
+      return (
+        <div className="chat-input-container">
+          <input
+            className="txt_field"
+            placeholder="Send Message a to Chatbot"
+            size="30"
+            onChange={saveInputText}
+            disabled={loading}
+            value={inputText} // ani mathi ko ma ('') empty string bhako le garda value ni empty huncha
+            onKeyDown={(event) => {
+              EnterValue(event);
+              RemoveVal(event);
+              // SpecialWord(event);
+            }}
+
+          />
+          <button
+            className="send-btn"
+            onClick={SendMessages}
+            disabled={loading}
+          >Send</button>
+        </div>
+
+      )
+    }
+
+
+
+
+    function ChatMessage({ message, sender }) { // Destructuring parameter directly in top
+      // const message = yolo.message // Message is being Received
+      // const sender = yolo.sender
+      // const {message, sender} = yolo;
+      // This is ShortCut called Destructuring for the up 2 variables
+
+      /* if (sender === "robot") {
+         return (
+          <div>
+            <img src="robot.png" width="50" />
+            {message}
+          </div>
+          )
+ 
+       } */
+
+      return (
+        <div className={sender === 'user'
+          ? 'chatMessage-user'
+          : 'chatMessage-robot'
+        }>
+          {sender === "robot" && (
+            <img className="chatMessage-bot" src="./images/robot.png" />)}
+          <div className="chatMessage-txt">
+            {message}
+          </div>
+          {sender === "user" && (
+            <img className="chatMessage-profile" src="./images/user.png" />)}
+        </div>
+
+      )
+    }
+
+    function ChatMessages({ chatMessages }) {
+
+      const chatMessagesRef = React.useRef(null);
+
+      // Access HTML element we are going to use useEffect
+      React.useEffect(() => {
+        const containerElem = chatMessagesRef.current
+        if (containerElem) {
+          containerElem.scrollTop = containerElem.scrollHeight;
+        }
+
+
+      }, [chatMessages]);
+      return (
+        <div className="chatMessage-Container" ref={chatMessagesRef}>
+          {chatMessages.map((chatMessage) => {
+            return (
+              <ChatMessage
+                message={chatMessage.message} // Result of the code are saved in the message prop.
+                sender={chatMessage.sender}
+                key={chatMessage.id}
+              />
+            )
+          })}
+        </div>
+      )
+    }
+
+    function App() {
+      const [loading, setLoading] = React.useState(false);
+
+      const [chatMessages, setChatMessages] = React.useState([]
+        // [{
+        //   message: 'Hello Chatbot',
+        //   sender: 'user',
+        //   id: 'id1'
+        // },
+        // {
+        //   message: 'Hi! How can I help you?',
+        //   sender: 'robot',
+        //   id: 'id2'
+        // },
+        // {
+        //   message: 'Can you get me todays date',
+        //   sender: 'user',
+        //   id: 'id3'
+        // },
+        // {
+        //   message: 'Todays is February 7',
+        //   sender: 'robot',
+        //   id: 'id4'
+        // },
+
+
+      );
+      // const [chatMessages, setChatMessages] = array; 
+      // const chatMessages = array[0]  // Current Data
+      // const setChatMessages = array[1];  // Second value in array update function. Lets you update the data so called updater function 
+
+      return (
+        <div className="Comp_container">
+          {chatMessages.length === 0 ? (
+            <div className="Welcome-text">
+              <p>Welcome to the chatbot project! Send a message using the textbox below</p>
+            </div>
+          ) : (
+            <ChatMessages
+              chatMessages={chatMessages}
+            />
+          )
+          }
+
+
+          {loading && <img src="./gif/loading-spinner.gif" className="gif-size"></img>}
+          <ChatInput
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        </div>
+      )
+    }
+
+    const gap_holding = document.querySelector('.hold');
+
+
+    ReactDOM.createRoot(gap_holding).render(<App />);
+  </script>
+</body>
+
+</html>

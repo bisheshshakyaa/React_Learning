@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.StaticBtn {
+  display: flex;
+  justify-content: start;
+  background-color: rgb(0, 123, 255);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  margin: 0.2rem;
+}
+.StaticBtn-2 {
+  background-color: rgb(220, 53, 69);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+}
+.InputHolder {
+  display: flex;
+  align-items: center;
+  border-width: 2px;
+  border-radius: 0.6rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0.6rem;
+  max-width: 500px;
+  width: 300px;
+}
+.LoginContainer {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+.Btn-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 0.5rem;
+}
+.sideTo {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+}
+.imgContainer {
+  width: 25px;
+}
+.StaticBtn-3 {
+  display: flex;
+  justify-content: start;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  margin: 0.2rem;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+    // function thenTre() {
+    //   if (!discountPrice) {
+    //     return (
+    //       <>
+    //         <p>Product Name:{name}</p>
+    //         <p>Price: {price}</p>
+    //         <button>Add to Cart</button>
+    //       </>
+    //     )
+    //   } else {
+    //     return (
+    //       <>
+    //         <p>Product Name:{name}</p>
+    //         <del>
+    //           <p>P
+    // rice:{price}</p>
+    //         </del>
+    //         <p>Discount price: {discountPrice}</p>
+    //         <button>Add to Cart</button>
+    //       </>
+    //     )
+    //   }
+    // }
+
+
+    function ProductDetails({ price, name, discountPrice, imageSrc }) {
+
+      return (
+        <div>
+          <img src={imageSrc} width="250" />
+          <p>Product Name:{name}</p>
+          {discountPrice ? (
+            <>
+              <p><del>Price: {price}</del></p>
+              <p>
+                Discount Price:{discountPrice}
+              </p>
+            </>
+          )
+            :
+            (
+              <p>Price: {price}</p>
+            )
+          }
+
+          <button>Add to Cart</button>
+          <br />
+        </div>
+      )
+    }
+
+
+    function App() {
+      return (
+        <>
+          <ProductDetails
+            name="Cotton Socks"
+            price="$10.90"
+            discountPrice="$5.45"
+            imageSrc="/cotton-socks.png"
+
+          />
+          <ProductDetails
+            name="T-shirt"
+            price="$7.99"
+            imageSrc="/plain-t-shirt.png"
+
+          />
+
+          <ProductDetails
+            name="Tennis balls"
+            price="$6.00"
+            imageSrc="/tennis-balls.png"
+          />
+
+          <ProductDetails
+            name="Valorant Gift Card"
+            price="$10.00"
+            imageSrc="/VG.jpg"
+          />
+        </>
+      )
+    }
+
+
+    const gap_holding = document.querySelector('.hold');
+
+
+    ReactDOM.createRoot(gap_holding).render(<App />);
+  </script>
+</body>
+
+</html>

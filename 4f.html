@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Exercises</title>
+  <link rel="stylesheet" href="./css/chill.css">
+  </link>
+
+</head>
+
+<body>
+
+
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+  <script type="text/babel">
+
+    function CounterApp() {
+
+      const [count, setCount] = React.useState(0);
+      const buttonRef = React.useRef();
+
+      function AddCount() {
+        setCount(count + 1);
+      }
+
+      // function AutoFill () {
+      //   setCount()
+      // }
+
+      function autoClick() {
+        setInterval(() => {
+          const buttonElem = buttonRef.current;
+          if (buttonElem) {
+            buttonElem.click();
+          }
+        }, 1000)
+      }
+
+      function RestCount() {
+        setCount(count === 0)
+      }
+      return (
+        <div className="BtnContainer">
+          <button
+            className="StaticBtn"
+            onClick={AddCount} ref={buttonRef}>
+            Clicked {count} times</button>
+          <button
+            className="StaticBtn"
+            onClick={RestCount}>Rest</button>
+          <button
+            className="StaticBtn"
+            onClick={autoClick}>Auto Click</button>
+        </div>
+      )
+    }
+
+    function ClockTime() {
+
+      const [time, setTime] = React.useState(dayjs().format('HH:mm:ss')); // Providing the State and giving a specific format of HH:mm:ss
+
+
+      React.useEffect(() => {
+        setInterval(() => {
+          setTime(dayjs().format('HH:mm:ss'))
+          // console.log('Run Code')
+        }, 1000)
+        // useEffect is used for running the code after the certain time or certain component is ran. We have set and Interval for every 1 sec it will set new time or update from the external dayjs file in the format of HH:mm:ss
+      }, []) // Empty Bracket represents that it will only run once.
+
+      return (
+        <div>
+          <p> Current Time: {time}</p>
+        </div>
+      )
+    }
+
+
+    // LoginUI Component 
+    function LoginUI({ showPassword, setShowPassword }) {
+
+      function ShowPass() { // Updater Function 
+        setShowPassword(!showPassword)
+      }
+
+      return (
+        <div className="LoginContainer">
+          <h1>Hello, welcome To my website </h1>
+          <input placeholder="Email"
+            type="email"
+            className="InputHolder" />
+          <div className="sideTo">
+            <input placeholder="Password"
+              type={showPassword ? 'text' : "password"} // Text le shows normal as it says if the showPassword true bhaye chai text natra password format ma convert garne
+              className="InputHolder" />
+            <button className="StaticBtn-3" onClick={ShowPass}>{showPassword === false ? <img src="./images/eye.png" className="imgContainer" /> : <img src="./images/hide.png" className="imgContainer" />}</button>
+          </div>
+
+          <div className="Btn-group">
+            <button className="StaticBtn">Login </button>
+            <button className="StaticBtn"> SignUp </button>
+
+          </div>
+        </div>
+      )
+    }
+
+
+    function StaticBtn({ btnStatus, setBtnStatus }) {
+
+      function ChangeState() { // State Change garna ko lagi function create Gare. Also a updater Function
+        setBtnStatus(!btnStatus) //  J cha tesko ulta garne for status 
+      }
+
+      return (
+        <div>
+          <button className={btnStatus === false ? 'StaticBtn' : 'StaticBtn-2'} onClick={ChangeState}>{btnStatus ? "OFF" : "ON"}</button>
+        </div>
+      )
+    }
+
+
+    function App() {
+
+      const [btnStatus, setBtnStatus] = React.useState(false); // Available For all
+      const [showPassword, setShowPassword] = React.useState(false); // State's for Passwords
+
+
+      return (
+        <>
+          <LoginUI
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+
+          <StaticBtn
+            btnStatus={btnStatus}
+            setBtnStatus={setBtnStatus} />
+          <ClockTime />
+          <CounterApp
+            count={count}
+            setCount={setCount}
+          />
+        </>
+      )
+    }
+
+
+
+    const gap_holding = document.querySelector('.hold');
+    ReactDOM.createRoot(gap_holding).render(<CounterApp />);
+  </script>
+</body>
+
+</html>

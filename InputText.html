@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ChatBot</title>
+</head>
+
+<body>
+
+
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+
+    function InputTag({ inputText, saveInputText, restBtn, InitialVal }) {
+      return (
+        <>
+          <input placeholder="Type any message" onChange={saveInputText} ></input>
+          <button onClick={restBtn}>Reset</button>
+          <button onClick={InitialVal}>Example</button>
+          <p>Hello  {inputText} </p>
+        </>
+      )
+    }
+
+
+    function App() {
+      const [inputText, setInputText] = React.useState('')
+
+      function saveInputText(event) {
+        const newValue = event.target.value;
+        if (newValue.length <= 7) {
+          setInputText(newValue)
+        }
+      }
+
+      function restBtn() {
+        setInputText(inputText === '');
+      }
+
+      function InitialVal() {
+        setInputText("Tisha")
+      }
+
+      return (
+        <>
+          <InputTag
+            inputText={inputText}
+            saveInputText={saveInputText}
+            restBtn={restBtn}
+            InitialVal={InitialVal}
+
+          />
+        </>
+      )
+    }
+
+
+
+
+
+    const gap_holding = document.querySelector('.hold');
+    ReactDOM.createRoot(gap_holding).render(<App />);
+  </script>
+</body>
+
+</html>

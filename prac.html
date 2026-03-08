@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ChatBot</title>
+</head>
+
+<body>
+
+
+  <div class="js-container"></div>
+  <div class="hold"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+    function textChange({ current, setCurrent }) {
+      function saveInputText(event) {
+        setCurrent(event.target.value)
+      }
+    }
+
+
+    function TxtInput() {
+      return (
+        <>
+          <input placeholder="Type a name here" onChange="txtChange"></input>
+          <p>
+            { }
+          </p>
+
+        </>
+      )
+    }
+
+
+
+    function RestBtns({ count, setCount }) {
+      function ResetBtn() {
+        setCount(count === 0);
+      }
+      return (
+        <>
+          <button onClick={ResetBtn}>Rest</button>
+        </>
+      )
+    }
+
+    function Button({ count, setCount }) {
+      function countUpdater() {
+        setCount(count + 1)
+        // console.log("Clicked Button")
+      }
+
+
+      return (
+        <>
+          <button onClick={countUpdater}>Click {count} {count > 1 ? 'times' : 'time'}</button>
+        </>
+
+      )
+    }
+
+    function App() {
+      const [current, setCurrent] = React.useState("");
+      // const [count, setCount] = React.useState(0);
+      return (
+        /*
+        <>
+          <Button
+            count={count}
+            setCount={setCount} />
+          <Button
+            count={count}
+            setCount={setCount} />
+          <RestBtns
+            count={count}
+            setCount={setCount} />
+        </>
+        */
+        <>
+          <TxtInput />
+        </>
+      )
+
+    }
+
+
+
+
+
+
+
+    const gap_holding = document.querySelector('.hold');
+    ReactDOM.createRoot(gap_holding).render(<App />);
+  </script>
+</body>
+
+</html>

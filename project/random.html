@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container"></div>
+  <div class="Random"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+
+    function showMessage({ current, setCurrent }) {
+
+      function handleClick() {
+        setCurrent(
+          <p>You have choose {vehicle}</p>
+        )
+      }
+    }
+
+    function Comps({ vehicle, message
+    }) {
+      return (
+        <div>
+          {vehicle === "Bike" ? (
+            <img src="/MotorCycle.jpg" placeholder="Money Picture" width="250" />
+          )
+            : vehicle === "Car" ?
+              (
+                <img src="/Car.png" placeholder="Money Picture" width="250" />
+              ) :
+              <img src="/dollar.png" width="250" />
+
+          }
+          <button onClick={handleClick}>Your Choice is </button>
+
+        </div>
+      )
+    }
+
+    function App() {
+      const [current, setCurrent]
+        = React.useState('')
+
+      return (
+        <>
+          <Comps
+            vehicle="Car"
+            message="You Have selected Car for your vehicle"
+            showMessage={showMessage}
+          />
+          <Comps
+            vehicle="Bike"
+            message="You Have selected bike for your vehicle"
+            showMessage={showMessage}
+
+          />
+          <Comps
+            vehicle="Truck"
+            message="You Have selected bike for 
+            your vehicle"
+            showMessage={showMessage}
+
+          />
+
+        </>
+      )
+    }
+
+
+
+
+
+
+
+
+
+    const hello_baby = document.querySelector('.Random')
+    ReactDOM.createRoot(hello_baby).render(<App />);
+
+  </script>
+
+
+</body>
+
+</html>
