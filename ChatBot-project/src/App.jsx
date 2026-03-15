@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import LoadingGif from "./assets/gif/loading-spinner.gif";
 import { ChatInput } from "./components/ChatInput";
@@ -6,9 +6,8 @@ import ChatMessages from "./components/ChatMessages";
 
 function App() {
   const [loading, setLoading] = useState(false);
-
   const [chatMessages, setChatMessages] = useState(
-    [],
+    JSON.parse(localStorage.getItem("messages")) || [],
     // [{
     //   message: 'Hello Chatbot',
     //   sender: 'user',
@@ -33,6 +32,9 @@ function App() {
   // const [chatMessages, setChatMessages] = array;
   // const chatMessages = array[0]  // Current Data
   // const setChatMessages = array[1];  // Second value in array update function. Lets you update the data so called updater function
+  useEffect(() => {
+    localStorage.setItem("messages", JSON.stringify(chatMessages));
+  }, [chatMessages]);
 
   return (
     <div className="Comp_container">

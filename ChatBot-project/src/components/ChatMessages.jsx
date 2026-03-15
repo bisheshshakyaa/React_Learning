@@ -19,6 +19,7 @@ export default function ChatMessages({ chatMessages }) {
           <ChatMessage
             message={chatMessage.message} // Result of the code are saved in the message prop.
             sender={chatMessage.sender}
+            time={chatMessage.time}
             key={chatMessage.id}
           />
         );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Chatbot } from "supersimpledev";
 import "../css/ChatInpt.css";
+import dayjs from "dayjs";
 
 export function ChatInput({
   chatMessages,
@@ -32,6 +33,11 @@ export function ChatInput({
   function removeMessage() {
     setInputText("");
   }
+
+  function ClearMessages() {
+    setChatMessages([]);
+  }
+
   // ? Random Kura gare ho yo SpecialWord Wala
   // function SpecialWord() {
   //   if (event.key === '`' || event.key === "`") {
@@ -54,6 +60,7 @@ export function ChatInput({
         message: messageToSend, // inputText le chai take's the text we write in text box
         sender: "user",
         id: crypto.randomUUID(), // Unique ID string
+        time: dayjs().valueOf(),
       },
     ];
     setChatMessages(newChatMessages);
@@ -65,6 +72,7 @@ export function ChatInput({
         message: Response,
         sender: "robot",
         id: crypto.randomUUID(),
+        time: dayjs().valueOf(),
       },
     ]);
     setLoading(false);
@@ -87,6 +95,9 @@ export function ChatInput({
       />
       <button className="send-btn" onClick={SendMessages} disabled={loading}>
         Send
+      </button>
+      <button className="clear-btn" onClick={ClearMessages} disabled={loading}>
+        Clear
       </button>
     </div>
   );

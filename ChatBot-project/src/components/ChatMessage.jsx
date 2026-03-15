@@ -1,8 +1,9 @@
+import dayjs from "dayjs";
 import RobotProfileImage from "../assets/robot.png";
 import UserProfileImage from "../assets/user.png";
 import "../css/ChatMessage.css";
 
-export function ChatMessage({ message, sender }) {
+export function ChatMessage({ message, sender, time }) {
   // Destructuring parameter directly in top
   // const message = yolo.message // Message is being Received
   // const sender = yolo.sender
@@ -26,7 +27,16 @@ export function ChatMessage({ message, sender }) {
       {sender === "robot" && (
         <img className="chatMessage-bot" src={RobotProfileImage} />
       )}
-      <div className="chatMessage-txt">{message}</div>
+      <div className="chatMessage-txt">
+        {message}
+        <div>
+          {time && (
+            <div className="chat-message-time">
+              {dayjs(time).format("h:mma")}
+            </div>
+          )}
+        </div>
+      </div>
       {sender === "user" && (
         <img className="chatMessage-profile" src={UserProfileImage} />
       )}
