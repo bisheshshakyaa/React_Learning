@@ -5,7 +5,7 @@ export const OrderPage = () => {
   return (
     <>
       <title>Order Page </title>
-
+      <link rel="icon" type="image/svg+xml" href="/images/orders-favicon.png" />
       <Header />
 
       <div className="orders-page">
