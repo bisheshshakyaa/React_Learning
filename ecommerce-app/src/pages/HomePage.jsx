@@ -2,7 +2,16 @@ import React from "react";
 import "./HomPage.css";
 import { Header } from "../components/Header";
 import { products } from "../../Starting-Code/ecommerce-project-main/data/products";
+import axios from "axios";
+
 export const HomePage = () => {
+  // ? Using Fetch for Retriving data from the BackEnd
+  axios.get("http://localhost:3000/api/products")
+    //.then le chai waits for the response to finish
+    .then((response) => {
+      console.log(response.data);
+    });
+
   return (
     <>
       <title>Home Page</title>
