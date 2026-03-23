@@ -8,15 +8,16 @@ export const HomePage = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    // ? Using Fetch for Retriving data from the BackEnd
+    // ? Using Fetch for Retrieving data from the BackEnd (Products)
     axios
-      .get("http://localhost:3000/api/products")
+      .get("/api/products")
       //.then le chai waits for the response to finish
       .then((response) => {
+        console.log(response.data);
         setProducts(response.data);
       });
-
-    axios.get("http://localhost:3000/api/cart-items").then((response) => {
+    // ? Fetch Retrieving data from the Backend for (Carts-Items)
+    axios.get("/api/cart-items").then((response) => {
       setCartItems(response.data);
     });
   }, []);
