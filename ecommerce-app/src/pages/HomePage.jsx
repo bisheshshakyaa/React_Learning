@@ -3,9 +3,8 @@ import "./HomPage.css";
 import { Header } from "../components/Header";
 import axios from "axios";
 
-export const HomePage = () => {
+export const HomePage = ({ cartItems }) => {
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     // ? Using Fetch for Retrieving data from the BackEnd (Products)
@@ -17,9 +16,6 @@ export const HomePage = () => {
         setProducts(response.data);
       });
     // ? Fetch Retrieving data from the Backend for (Carts-Items)
-    axios.get("/api/cart-items").then((response) => {
-      setCartItems(response.data);
-    });
   }, []);
 
   return (
