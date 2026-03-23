@@ -1,16 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./HomPage.css";
 import { Header } from "../components/Header";
-import { products } from "../../Starting-Code/ecommerce-project-main/data/products";
 import axios from "axios";
 
 export const HomePage = () => {
-  // ? Using Fetch for Retriving data from the BackEnd
-  axios.get("http://localhost:3000/api/products")
-    //.then le chai waits for the response to finish
-    .then((response) => {
-      console.log(response.data);
-    });
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // ? Using Fetch for Retriving data from the BackEnd
+    axios
+      .get("http://localhost:3000/api/products")
+      //.then le chai waits for the response to finish
+      .then((response) => {
+        setProducts(response.data);
+      });
+  }, []);
 
   return (
     <>
@@ -21,29 +25,29 @@ export const HomePage = () => {
 
       <div className="home-page">
         <div className="products-grid">
-          {products.map((products) => {
+          {products.map((product) => {
             return (
-              <div key={products.id} className="product-container">
+              <div key={product.id} className="product-container">
                 <div className="product-image-container">
-                  <img className="product-image" src={products.image} />
+                  <img className="product-image" src={product.image} />
                 </div>
 
                 <div className="product-name limit-text-to-2-lines">
-                  {products.name}
+                  {product.name}
                 </div>
 
                 <div className="product-rating-container">
                   <img
                     className="product-rating-stars"
-                    src={`images/ratings/rating-${products.rating.stars * 10}.png`}
+                    src={`images/ratings/rating-${product.rating.stars * 10}.png`}
                   />
                   <div className="product-rating-count link-primary">
-                    {products.rating.count}
+                    {product.rating.count}
                   </div>
                 </div>
 
                 <div className="product-price">
-                  ${(products.priceCents / 100).toFixed(2)}
+                  ${(product.priceCents / 100).toFixed(2)}
                 </div>
 
                 <div className="product-quantity-container">
