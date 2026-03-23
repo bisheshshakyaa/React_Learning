@@ -3,7 +3,13 @@ import "./Header.css";
 import LogoWhite from "../assets/images/logo-white.png";
 import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
 
-export const Header = () => {
+export const Header = ({ cartItems }) => {
+  let totalQuantity = 0;
+
+  cartItems.forEach((cartItem) => {
+    totalQuantity += cartItem.quantity;
+  });
+
   return (
     <div className="header">
       <div className="left-section">
@@ -26,7 +32,7 @@ export const Header = () => {
         </NavLink>
         <NavLink className="cart-link header-link" to="/checkout">
           <img className="cart-icon" src="images/icons/cart-icon.png" />
-          <div className="cart-quantity">3</div>
+          <div className="cart-quantity">{totalQuantity}</div>
           <div className="cart-text">Cart</div>
         </NavLink>
       </div>
