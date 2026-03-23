@@ -13,7 +13,6 @@ export const HomePage = ({ cartItems }) => {
       .get("/api/products")
       //.then le chai waits for the response to finish
       .then((response) => {
-        console.log(response.data);
         setProducts(response.data);
       });
     // ? Fetch Retrieving data from the Backend for (Carts-Items)
