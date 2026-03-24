@@ -9,10 +9,16 @@ import { formatMoney } from "../../utils/money";
 export const OrderPage = ({ cartItems }) => {
   const [orderLists, setOrderLists] = useState([]);
 
+  // Data fetching using async and await :
+  // Recap Async and await are used for running code which takes a longer time to process or respond.
+
   useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
+    const fetchOrderData = async () => {
+      const response = await axios.get("/api/orders?expand=products");
       setOrderLists(response.data);
-    });
+    };
+
+    fetchOrderData();
   }, []);
 
   return (
